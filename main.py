@@ -1,6 +1,6 @@
 import gym
+from experimentConfiguration import NUMBER_OF_EXPERIMENTS
 
-NUMBER_OF_EXPERIMENTS = 2
 
 env = gym.make('Boxing-v0', render_mode="human")
 
@@ -10,9 +10,6 @@ print(env.observation_space)
 # Can do a simple punching bot
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
 # Crossover and mutation 
-
-
-
 for i in range (0,NUMBER_OF_EXPERIMENTS):
     print("Experiment - ", i)
     env.reset()
