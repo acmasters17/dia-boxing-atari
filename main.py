@@ -1,7 +1,7 @@
 import gym
 import time
-from metricHandler import MetricHandler
-from utilityFunctions import getAgentClass, parseCommandLineArguements
+from Utilities.metricHandler import MetricHandler
+from Utilities.utilityFunctions import getAgentClass, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
 settings = parseCommandLineArguements()
