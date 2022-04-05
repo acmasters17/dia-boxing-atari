@@ -1,16 +1,17 @@
 import gym
-from experimentConfiguration import NUMBER_OF_EXPERIMENTS
+import numpy as np
+from utilityFunctions import parseCommandLineArguements
 
+# Get settings for experiments that are passed as command line arguments
+settings = parseCommandLineArguements()
 
+# Create the atari game environment
 env = gym.make('Boxing-v0', render_mode="human")
-
-print(env.action_space)
-print(env.observation_space)
 
 # Can do a simple punching bot
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
-# Crossover and mutation 
-for i in range (0,NUMBER_OF_EXPERIMENTS):
+# Crossover and mutation
+for i in range(0, NUMBER_OF_EXPERIMENTS):
     print("Experiment - ", i)
     env.reset()
     totalRewardForRun = 0
@@ -31,7 +32,6 @@ for i in range (0,NUMBER_OF_EXPERIMENTS):
         # 15 - throw fists and move West 16 - throw fists and move East
         # 17
 
-
         if(count < 10):
             action = 3
         elif(count < 20):
@@ -39,17 +39,17 @@ for i in range (0,NUMBER_OF_EXPERIMENTS):
         else:
             action = 13 if lastAction == 0 else 0
             lastAction = action
-        
+
         count += 1
         observation, reward, done, info = env.step(action)
         totalRewardForRun = totalRewardForRun + reward
+        if reward == 2.0:
+            print(reward)
+            exit(0)
         runFinished = done
-        
-
 
     # Final reward gets lower the better the score
-    print("Total Reward for Run: ",totalRewardForRun)
+    print("Total Reward for Run: ", totalRewardForRun)
     print("Number of loops: ", count)
 
     env.close()
-
