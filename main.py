@@ -1,4 +1,5 @@
 import gym
+import time
 from utilityFunctions import getAgentClass, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
@@ -17,11 +18,15 @@ env = gym.make('Boxing-v0', render_mode="human")
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
 # Crossover and mutation
 for i in range(0, numExperiments):
-    print("Experiment - ", i + 1)
-    env.reset()
+    print("\nExperiment - ", i + 1)
+    # Initialise Experiment Variables
+    startSeconds = time.time()
+    runFinished = False
     totalRewardForRun = 0
 
-    runFinished = False
+    env.reset()
+
+    
     count = 0
     lastAction = 1
     while runFinished == False:
@@ -47,11 +52,16 @@ for i in range(0, numExperiments):
 
         count += 1
         observation, reward, done, info = env.step(chosenAgent.getAction(env))
+
         totalRewardForRun = totalRewardForRun + reward
         runFinished = done
 
-    # Final reward gets lower the better the score
+    # Final reward is difference between scores
+    endSeconds = time.time()
+    roundTimeInSeconds = round(endSeconds - startSeconds)
+
     print("Total Reward for Run: ", totalRewardForRun)
-    print("Number of loops: ", count)
+    print("Time in seconds of Run: ", str(roundTimeInSeconds))
+    print()
 
     env.close()
