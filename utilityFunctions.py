@@ -1,4 +1,7 @@
 from argparse import ArgumentParser
+from Agents.Agent import Agent
+
+from Agents.RandomAgent import RandomAgent
 
 # Parses command line arguments to get settings for program
 def parseCommandLineArguements():
@@ -13,3 +16,11 @@ def parseCommandLineArguements():
     args = parser.parse_args()
 
     return args
+
+
+# Get agent class based off argument
+def getAgentClass(name):
+    if(name == "random"):
+        return RandomAgent()
+    else:
+        return Agent()

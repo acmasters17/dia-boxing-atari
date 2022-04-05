@@ -1,9 +1,14 @@
 import gym
-import numpy as np
-from utilityFunctions import parseCommandLineArguements
+from utilityFunctions import getAgentClass, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
 settings = parseCommandLineArguements()
+
+# Get agent based off settings to use
+chosenAgent = getAgentClass(settings.agentName)
+
+# Get number of experiments based off settings used
+numExperiments = int(settings.numberExperiments)
 
 # Create the atari game environment
 env = gym.make('Boxing-v0', render_mode="human")
@@ -11,8 +16,8 @@ env = gym.make('Boxing-v0', render_mode="human")
 # Can do a simple punching bot
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
 # Crossover and mutation
-for i in range(0, NUMBER_OF_EXPERIMENTS):
-    print("Experiment - ", i)
+for i in range(0, numExperiments):
+    print("Experiment - ", i + 1)
     env.reset()
     totalRewardForRun = 0
 
@@ -41,11 +46,8 @@ for i in range(0, NUMBER_OF_EXPERIMENTS):
             lastAction = action
 
         count += 1
-        observation, reward, done, info = env.step(action)
+        observation, reward, done, info = env.step(chosenAgent.getAction(env))
         totalRewardForRun = totalRewardForRun + reward
-        if reward == 2.0:
-            print(reward)
-            exit(0)
         runFinished = done
 
     # Final reward gets lower the better the score
