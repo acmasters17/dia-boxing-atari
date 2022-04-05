@@ -1,5 +1,6 @@
 import gym
 import time
+from metricHandler import MetricHandler
 from utilityFunctions import getAgentClass, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
@@ -11,8 +12,9 @@ chosenAgent = getAgentClass(settings.agentName)
 # Get number of experiments based off settings used
 numExperiments = int(settings.numberExperiments)
 
-# Create the atari game environment
+# Create the atari game environment and get a metrics Handler
 env = gym.make('Boxing-v0', render_mode="human")
+metricsHandler = MetricHandler()
 
 # Can do a simple punching bot
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
@@ -20,9 +22,8 @@ env = gym.make('Boxing-v0', render_mode="human")
 for i in range(0, numExperiments):
     print("\nExperiment - ", i + 1)
     # Initialise Experiment Variables
-    startSeconds = time.time()
+    metricsHandler.startExperiment()
     runFinished = False
-    totalRewardForRun = 0
 
     env.reset()
 
@@ -53,15 +54,15 @@ for i in range(0, numExperiments):
         count += 1
         observation, reward, done, info = env.step(chosenAgent.getAction(env))
 
-        totalRewardForRun = totalRewardForRun + reward
+        metricsHandler.updateScores(reward)
         runFinished = done
 
-    # Final reward is difference between scores
-    endSeconds = time.time()
-    roundTimeInSeconds = round(endSeconds - startSeconds)
+    # End experiment
+    metricsHandler.endExperiment()
 
-    print("Total Reward for Run: ", totalRewardForRun)
-    print("Time in seconds of Run: ", str(roundTimeInSeconds))
-    print()
+    print("Total Reward for Run: ", metricsHandler.getReward())
+    print("Time in seconds of Run: ", metricsHandler.getExperimentTime())
+    print("Player Score: ", metricsHandler.getAgentScore())
+    print("Enemy Score: ", metricsHandler.getEnemyScore())
 
     env.close()
