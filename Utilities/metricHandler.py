@@ -38,3 +38,10 @@ class MetricHandler:
     def getExperimentTime(self):
         return round(self.endTime - self.startTime)
 
+    def printCurrentExperimentResults(self):
+        print("Total Reward for Run: ", self.getReward())
+        print("Time in seconds of Run: ", self.getExperimentTime())
+        print("Player Score: ", self.getAgentScore())
+        print("Enemy Score: ", self.getEnemyScore())
+
+

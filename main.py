@@ -1,7 +1,6 @@
 import gym
-import time
 from Utilities.metricHandler import MetricHandler
-from Utilities.utilityFunctions import getAgentClass, parseCommandLineArguements
+from Utilities.utilityFunctions import getAgentClass, getNumberOfExperiments, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
 settings = parseCommandLineArguements()
@@ -10,26 +9,26 @@ settings = parseCommandLineArguements()
 chosenAgent = getAgentClass(settings.agentName)
 
 # Get number of experiments based off settings used
-numExperiments = int(settings.numberExperiments)
+numExperiments = getNumberOfExperiments(settings.numberExperiments)
 
 # Create the atari game environment and get a metrics Handler
-env = gym.make('Boxing-v0', render_mode="human")
+# env = gym.make('Boxing-v0', render_mode="human")
+env = gym.make('Boxing-v0')
 metricsHandler = MetricHandler()
+
 
 # Can do a simple punching bot
 # Can map observation space to actions like he did in lectures then run a ga - lecture on 22 march
 # Crossover and mutation
 for i in range(0, numExperiments):
     print("\nExperiment - ", i + 1)
+
     # Initialise Experiment Variables
     metricsHandler.startExperiment()
     runFinished = False
 
     env.reset()
 
-    
-    count = 0
-    lastAction = 1
     while runFinished == False:
         # 18 different states for the action in boxing
         # 0 - do nothing - we want to throw fist then press zero to retract
@@ -42,27 +41,16 @@ for i in range(0, numExperiments):
         # 13 - throw fist and move South           14 - throw fists?
         # 15 - throw fists and move West 16 - throw fists and move East
         # 17
-
-        if(count < 10):
-            action = 3
-        elif(count < 20):
-            action = 5
-        else:
-            action = 13 if lastAction == 0 else 0
-            lastAction = action
-
-        count += 1
         observation, reward, done, info = env.step(chosenAgent.getAction(env))
 
         metricsHandler.updateScores(reward)
+
         runFinished = done
 
     # End experiment
     metricsHandler.endExperiment()
 
-    print("Total Reward for Run: ", metricsHandler.getReward())
-    print("Time in seconds of Run: ", metricsHandler.getExperimentTime())
-    print("Player Score: ", metricsHandler.getAgentScore())
-    print("Enemy Score: ", metricsHandler.getEnemyScore())
+    # Print out results
+    metricsHandler.printCurrentExperimentResults()
 
     env.close()

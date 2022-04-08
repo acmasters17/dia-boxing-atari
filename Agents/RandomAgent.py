@@ -5,7 +5,6 @@ from Agents.Agent import Agent
 class RandomAgent(Agent):
     def __init__(self):
         super().__init__()
-        self.graduationyear = 2019
 
     def getAction(self, env:Env):
         return env.action_space.sample()

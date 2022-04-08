@@ -19,8 +19,17 @@ def parseCommandLineArguements():
 
 
 # Get agent class based off argument
-def getAgentClass(name):
+def getAgentClass(name:str):
     if(name == "random"):
         return RandomAgent()
     else:
         return Agent()
+
+
+# Get number of experiments based off argument if less than 1 return 1
+def getNumberOfExperiments(n:str):
+    num = int(n)
+    if(num < 1):
+        print("Error in number of experiments passed, must be greater than or equal to 1")
+    else:
+        return num
