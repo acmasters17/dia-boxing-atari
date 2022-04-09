@@ -1,5 +1,5 @@
 import gym
-from Utilities.metricHandler import MetricHandler
+from Scoring.metricHandler import MetricHandler
 from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
@@ -27,7 +27,8 @@ for i in range(0, numExperiments):
     print("\nExperiment - ", i + 1)
 
     # Initialise Experiment Variables
-    metricsHandler.startExperiment()
+    metricsHandler.createNewExperiment()
+    metricsHandler.startCurrentExperiment()
     runFinished = False
 
     env.reset()
@@ -46,15 +47,26 @@ for i in range(0, numExperiments):
         # 17
         observation, reward, done, info = env.step(chosenAgent.getAction(env))
 
-        metricsHandler.updateScores(reward)
+        metricsHandler.updateScoresForCurrentExperiment(reward)
 
         runFinished = done
 
     # End experiment
-    metricsHandler.endExperiment()
+    metricsHandler.endCurrentExperiment()
 
-    # Print out results
+    # Print out current experiment results
     if isSilent == False:
         metricsHandler.printCurrentExperimentResults()
 
+
+    # Log current experiment
+    metricsHandler.logCurrentExperiment()
+
     env.close()
+
+
+# Display graphs
+experiments = metricsHandler.getAllExperiments()
+
+
+
