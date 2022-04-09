@@ -1,4 +1,4 @@
-import time
+from typing import List
 
 from Scoring.experimentMetrics import ExperimentMetrics
 
@@ -6,7 +6,7 @@ class MetricHandler:
     def __init__(self):
         # Initialise
         self.currentExperiment = ExperimentMetrics()
-        self.experimentsMetricsList = []
+        self.experimentsMetricsList:List[ExperimentMetrics] = []
 
     def updateScoresForCurrentExperiment(self,reward:float):
         self.currentExperiment.updateScores(reward)

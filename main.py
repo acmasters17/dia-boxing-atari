@@ -1,6 +1,10 @@
 import gym
+from matplotlib import pyplot as plt
+from Graphs.playerVsEnemyScoreLineGraph import drawPlayerVsEnemyScoreLineGraph
 from Scoring.metricHandler import MetricHandler
 from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, parseCommandLineArguements
+
+plt.style.use('seaborn-deep')
 
 # Get settings for experiments that are passed as command line arguments
 settings = parseCommandLineArguements()
@@ -67,6 +71,9 @@ for i in range(0, numExperiments):
 
 # Display graphs
 experiments = metricsHandler.getAllExperiments()
+
+# Draw a line graph of scores
+drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
 
 
 
