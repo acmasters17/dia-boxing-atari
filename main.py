@@ -1,6 +1,6 @@
 import gym
 from Utilities.metricHandler import MetricHandler
-from Utilities.utilityFunctions import getAgentClass, getNumberOfExperiments, parseCommandLineArguements
+from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, parseCommandLineArguements
 
 # Get settings for experiments that are passed as command line arguments
 settings = parseCommandLineArguements()
@@ -10,6 +10,9 @@ chosenAgent = getAgentClass(settings.agentName)
 
 # Get number of experiments based off settings used
 numExperiments = getNumberOfExperiments(settings.numberExperiments)
+
+# Get if program should be silent or not
+isSilent = getIsSilent(settings.isSilent)
 
 # Create the atari game environment and get a metrics Handler
 # env = gym.make('Boxing-v0', render_mode="human")
@@ -51,6 +54,7 @@ for i in range(0, numExperiments):
     metricsHandler.endExperiment()
 
     # Print out results
-    metricsHandler.printCurrentExperimentResults()
+    if isSilent == False:
+        metricsHandler.printCurrentExperimentResults()
 
     env.close()
