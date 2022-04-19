@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 from Graphs.playerVsEnemyScoreLineGraph import drawPlayerVsEnemyScoreLineGraph
 from Scoring.metricHandler import MetricHandler
 from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, parseCommandLineArguements
+import random
 
 plt.style.use('seaborn-deep')
 
@@ -21,6 +22,9 @@ isSilent = getIsSilent(settings.isSilent)
 # Create the atari game environment and get a metrics Handler
 # env = gym.make('Boxing-v0', render_mode="human")
 env = gym.make('Boxing-v0')
+# Set the seed of the runs
+random.seed(0)
+env.seed(0)
 metricsHandler = MetricHandler()
 
 
@@ -68,6 +72,13 @@ for i in range(0, numExperiments):
 
     env.close()
 
+print("*************************\n")
+# Print Averages
+print("Average Reward for " + str(numExperiments) + " experiments: ", metricsHandler.getAverageReward())
+print("Average Player Score for " + str(numExperiments) + " experiments: ",metricsHandler.getAveragePlayerScore())
+print("Average Enemy Score for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageEnemyScores())
+print("Average Number of Actions for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageNumberOfActionsTaken())
+print("Average Experiment Real Time seconds for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageNumberOfRealTimeSeconds())
 
 # Display graphs
 experiments = metricsHandler.getAllExperiments()

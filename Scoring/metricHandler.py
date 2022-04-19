@@ -32,6 +32,31 @@ class MetricHandler:
     def getAllExperiments(self):
         return self.experimentsMetricsList
 
+    def getAverageReward(self):
+        rewards = [ e.getReward() for e in self.experimentsMetricsList]
+        return sum(rewards) / len(rewards)
+
+    def getAveragePlayerScore(self):
+        playerScores = [ e.getAgentScore() for e in self.experimentsMetricsList]
+        return sum(playerScores) / len(playerScores)
+
+    def getAverageEnemyScores(self):
+        enemyScores = [ e.getEnemyScore() for e in self.experimentsMetricsList]
+        return sum(enemyScores) / len(enemyScores)
+
+    def getAverageNumberOfActionsTaken(self):
+        numActioms = [ e.getNumberOfActionsTaken() for e in self.experimentsMetricsList]
+        return sum(numActioms) / len(numActioms)
+
+    def getAverageNumberOfRealTimeSeconds(self):
+        numSeconds = [ e.getExperimentTime() for e in self.experimentsMetricsList]
+        return sum(numSeconds) / len(numSeconds)
+    
+
+
+    
+        
+
 
 
 

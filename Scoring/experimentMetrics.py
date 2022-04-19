@@ -53,7 +53,8 @@ class ExperimentMetrics:
     # prints results
     def printExperimentResults(self):
         print("Total Reward for Run: ", self.getReward())
-        print("Time in seconds of Run: ", self.getExperimentTime())
+        print("Real Time in seconds of Run: ", self.getExperimentTime())
+        print("Number of Action Loops: ",self.getNumberOfActionsTaken())
         print("Player Score: ", self.getAgentScore())
         print("Enemy Score: ", self.getEnemyScore())
     
