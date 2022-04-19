@@ -84,7 +84,7 @@ print("Average Experiment Real Time seconds for " + str(numExperiments) + " expe
 experiments = metricsHandler.getAllExperiments()
 
 # Draw a line graph of scores
-drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
+# drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
 
 
 
