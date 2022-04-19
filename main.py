@@ -20,12 +20,13 @@ numExperiments = getNumberOfExperiments(settings.numberExperiments)
 isSilent = getIsSilent(settings.isSilent)
 
 # Create the atari game environment and get a metrics Handler
-# env = gym.make('Boxing-v0', render_mode="human")
-env = gym.make('Boxing-v0')
+env = gym.make('Boxing-v0', render_mode="human")
+# env = gym.make('Boxing-v0')
 # Set the seed of the runs
 random.seed(0)
 env.seed(0)
 metricsHandler = MetricHandler()
+
 
 
 # Can do a simple punching bot
@@ -39,7 +40,7 @@ for i in range(0, numExperiments):
     metricsHandler.startCurrentExperiment()
     runFinished = False
 
-    env.reset()
+    observation = env.reset()
 
     while runFinished == False:
         # 18 different states for the action in boxing
@@ -53,7 +54,9 @@ for i in range(0, numExperiments):
         # 13 - throw fist and move South           14 - throw fists?
         # 15 - throw fists and move West 16 - throw fists and move East
         # 17
-        observation, reward, done, info = env.step(chosenAgent.getAction(env))
+        newobs, reward, done, info = env.step(chosenAgent.getAction(env,observation))
+
+        observation = newobs
 
         metricsHandler.updateScoresForCurrentExperiment(reward)
 

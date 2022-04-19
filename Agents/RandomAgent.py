@@ -6,5 +6,5 @@ class RandomAgent(Agent):
     def __init__(self):
         super().__init__()
 
-    def getAction(self, env:Env):
+    def getAction(self, env:Env, observation):
         return env.action_space.sample()

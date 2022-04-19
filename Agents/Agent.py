@@ -8,6 +8,6 @@ class Agent:
         return
 
     # Returns an action for agent to do
-    def getAction(self,env:Env):
+    def getAction(self,env:Env,observation):
         return 0
 

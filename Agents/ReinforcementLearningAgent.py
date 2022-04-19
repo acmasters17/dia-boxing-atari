@@ -1,15 +1,17 @@
 from gym import Env
+import gym
 from Agents.Agent import Agent
-import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Activation
+from stable_baselines3 import A2C, PPO
 
-# Agent will randomly select an action from the sample space and return that action
+# Agent will train using reinforment learning
 class ReinforcementLearningAgent(Agent):
-    def __init__(self, env:Env):
+    def __init__(self):
         super().__init__()
-        height, width, channels = env.observation_space.shape
-        actions = env.action_space.n
+        env = gym.make('Boxing-v0')
+        model = A2C("MlpPolicy", env, verbose=1)
+        model.learn(total_timesteps=10000)
+        self.model = model
 
-    def getAction(self, env:Env):
-        return env.action_space.sample()
+    def getAction(self, env:Env, observation):
+        action, _states = self.model.predict(observation, deterministic=True)
+        return action
