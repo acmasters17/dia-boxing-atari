@@ -1,10 +1,11 @@
 from gym import Env
 from Agents.Agent import Agent
 
-# Agent will randomly select an action from the sample space and return that action
-class RandomAgent(Agent):
+# principle for this approach is 
+class ReactiveAgent(Agent):
     def __init__(self):
         super().__init__()
 
     def getAction(self,env:Env,lastobservation,lastreward):
-        return env.action_space.sample()
+        print(lastreward)
+        return 0

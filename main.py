@@ -43,6 +43,7 @@ for i in range(0, numExperiments):
     runFinished = False
 
     observation = env.reset()
+    reward = 0
 
     while runFinished == False:
         # 18 different states for the action in boxing
@@ -56,11 +57,12 @@ for i in range(0, numExperiments):
         # 13 - throw fist and move South           14 - throw fists?
         # 15 - throw fists and move West 16 - throw fists and move East
         # 17
-        newobs, reward, done, info = env.step(chosenAgent.getAction(env,observation))
+        newobs, newreward, done, info = env.step(chosenAgent.getAction(env,observation,reward))
 
         observation = newobs
+        reward = newreward
 
-        metricsHandler.updateScoresForCurrentExperiment(reward)
+        metricsHandler.updateScoresForCurrentExperiment(newreward)
 
         runFinished = done
 

@@ -12,6 +12,6 @@ class ReinforcementLearningAgent(Agent):
         model.learn(total_timesteps=10000)
         self.model = model
 
-    def getAction(self, env:Env, observation):
-        action, _states = self.model.predict(observation, deterministic=True)
+    def getAction(self,env:Env,lastobservation,lastreward):
+        action, _states = self.model.predict(lastobservation, deterministic=True)
         return action

@@ -1,9 +1,8 @@
 from argparse import ArgumentParser
 
-from gym import Env
 from Agents.Agent import Agent
-
 from Agents.RandomAgent import RandomAgent
+from Agents.ReactiveAgent import ReactiveAgent
 from Agents.ReinforcementLearningAgent import ReinforcementLearningAgent
 
 # Parses command line arguments to get settings for program
@@ -27,6 +26,8 @@ def parseCommandLineArguements():
 def getAgentClass(name: str):
     if(name == "random"):
         return RandomAgent()
+    elif(name == "srs"):
+        return ReactiveAgent()
     elif(name == "rl"):
         return ReinforcementLearningAgent()
     else:
