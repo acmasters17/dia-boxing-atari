@@ -2,7 +2,7 @@ import gym
 from matplotlib import pyplot as plt
 from Graphs.playerVsEnemyScoreLineGraph import drawPlayerVsEnemyScoreLineGraph
 from Scoring.metricHandler import MetricHandler
-from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, parseCommandLineArguements
+from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, getShouldDisplay, parseCommandLineArguements
 import random
 
 plt.style.use('seaborn-deep')
@@ -19,9 +19,11 @@ numExperiments = getNumberOfExperiments(settings.numberExperiments)
 # Get if program should be silent or not
 isSilent = getIsSilent(settings.isSilent)
 
+# Get if proram should render or not
+shouldDisplay = getShouldDisplay(settings.shouldDisplay)
+
 # Create the atari game environment and get a metrics Handler
-env = gym.make('Boxing-v0', render_mode="human")
-# env = gym.make('Boxing-v0')
+env = gym.make('Boxing-v0', render_mode="human") if shouldDisplay else gym.make('Boxing-v0')
 # Set the seed of the runs
 random.seed(0)
 env.seed(0)

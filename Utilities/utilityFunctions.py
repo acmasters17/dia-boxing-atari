@@ -15,6 +15,8 @@ def parseCommandLineArguements():
                         help="Number of experiments to run e.g 100 ", metavar="Num of Runs", default=10)
     parser.add_argument("-s", dest="isSilent", metavar="Is Silent", default=False,
                         help="don't print experiment status messages to stdout")
+    parser.add_argument("-d", dest="shouldDisplay", metavar="Display Screen", default=False,
+                        help="render what is happening in the game")
 
     args = parser.parse_args()
 
@@ -42,6 +44,13 @@ def getNumberOfExperiments(n: str):
 
 # Gets if it should output logging messages or not
 def getIsSilent(s: str):
+    if(s == "True"):
+        return True
+    else:
+        return False
+
+# Gets if it should display the screen as the boxing takes place
+def getShouldDisplay(s: str):
     if(s == "True"):
         return True
     else:
