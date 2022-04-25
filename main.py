@@ -24,7 +24,6 @@ shouldDisplay = getShouldDisplay(settings.shouldDisplay)
 
 # Create the atari game environment and get a metrics Handler
 env = gym.make('Boxing-v0', render_mode="human") if shouldDisplay else gym.make('Boxing-v0')
-print(env.env.get_action_meanings())
 # Set the seed of the runs
 random.seed(0)
 env.seed(0)
