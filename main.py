@@ -46,17 +46,6 @@ for i in range(0, numExperiments):
     reward = 0
 
     while runFinished == False:
-        # 18 different states for the action in boxing
-        # 0 - do nothing - we want to throw fist then press zero to retract
-        # 1 - throw fists and dont move      2 - move North
-        # 3 - move East         4 - move West
-        # 5 - move South         6 - move North East
-        # 7 - move North West          8 - move South East
-        # 9 - move South West
-        # 10 - throw fist and move North           11 - throw fist and move East
-        # 13 - throw fist and move South           14 - throw fists?
-        # 15 - throw fists and move West 16 - throw fists and move East
-        # 17
         newobs, newreward, done, info = env.step(chosenAgent.getAction(env,observation,reward))
 
         observation = newobs
@@ -79,13 +68,26 @@ for i in range(0, numExperiments):
 
     env.close()
 
+
+# Log out results of all experiments 
 print("*************************\n")
-# Print Averages
+print("RESULTS")
+print("-------------------------")
+print("Number of KO Wins: ", metricsHandler.getNumberOfKOWins())
+print("Number of Wins: ", metricsHandler.getNumberOfWins())
+print("Number of Draws: ", metricsHandler.getNumberOfDraws())
+print("Number of Losses: ", metricsHandler.getNumberOfLosses())
+print("Number of KO Losses: ", metricsHandler.getNumberOfKOLosses())
+print("\n")
+print("AVERAGES")
+print("-------------------------")
 print("Average Reward for " + str(numExperiments) + " experiments: ", metricsHandler.getAverageReward())
 print("Average Player Score for " + str(numExperiments) + " experiments: ",metricsHandler.getAveragePlayerScore())
 print("Average Enemy Score for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageEnemyScores())
 print("Average Number of Actions for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageNumberOfActionsTaken())
 print("Average Experiment Real Time seconds for " + str(numExperiments) + " experiments: ",metricsHandler.getAverageNumberOfRealTimeSeconds())
+print("Average Win Rate for " + str(numExperiments) + " experiments: ", metricsHandler.getAverageWinRate(), "%")
+print("\n")
 
 # Display graphs
 experiments = metricsHandler.getAllExperiments()

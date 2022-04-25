@@ -1,4 +1,5 @@
 from typing import List
+from Models.Results import Result
 
 from Scoring.experimentMetrics import ExperimentMetrics
 
@@ -51,6 +52,31 @@ class MetricHandler:
     def getAverageNumberOfRealTimeSeconds(self):
         numSeconds = [ e.getExperimentTime() for e in self.experimentsMetricsList]
         return sum(numSeconds) / len(numSeconds)
+
+    def getAverageWinRate(self):
+        winRatio = (self.getNumberOfKOWins() + self.getNumberOfWins() / len(self.experimentsMetricsList))
+        return winRatio * 100
+
+    def getNumberOfKOWins(self):
+        numKOWins = [ e.getExperimentResult() for e in self.experimentsMetricsList if e.getExperimentResult() == Result.KOWIN]
+        return len(numKOWins)
+
+    def getNumberOfWins(self):
+        numWins = [ e.getExperimentResult() for e in self.experimentsMetricsList if e.getExperimentResult() == Result.WIN]
+        return len(numWins)
+
+    def getNumberOfDraws(self):
+        numDraws = [ e.getExperimentResult() for e in self.experimentsMetricsList if e.getExperimentResult() == Result.DRAW]
+        return len(numDraws)
+
+    def getNumberOfLosses(self):
+        numLosses = [ e.getExperimentResult() for e in self.experimentsMetricsList if e.getExperimentResult() == Result.LOSS]
+        return len(numLosses)
+
+    def getNumberOfKOLosses(self):
+        numKOLosses = [ e.getExperimentResult() for e in self.experimentsMetricsList if e.getExperimentResult() == Result.KOLOSS]
+        return len(numKOLosses)
+
     
 
 
