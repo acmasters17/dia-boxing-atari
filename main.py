@@ -1,6 +1,7 @@
 import gym
 from matplotlib import pyplot as plt
 from Graphs.playerVsEnemyScoreLineGraph import drawPlayerVsEnemyScoreLineGraph
+from Graphs.rewardLineGraph import drawRewardLineGraph
 from Scoring.metricHandler import MetricHandler
 from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, getShouldDisplay, parseCommandLineArguements
 import random
@@ -93,7 +94,9 @@ print("\n")
 experiments = metricsHandler.getAllExperiments()
 
 # Draw a line graph of scores
-# drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
+drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
+# Draw a graph of rewards
+drawRewardLineGraph(rewards=[ e.getReward() for e in experiments])
 
 
 
