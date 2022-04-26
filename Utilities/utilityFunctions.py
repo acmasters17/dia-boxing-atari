@@ -2,14 +2,15 @@ from argparse import ArgumentParser
 
 from Agents.Agent import Agent
 from Agents.RandomAgent import RandomAgent
-from Agents.JugglingReactiveAgent import JugglingReactiveAgent
+from Agents.AggressiveJugglingReactiveAgent import AggressiveJugglingReactiveAgent
+from Agents.DefensiveJugglingReactiveAgent import DefensiveJugglingReactiveAgent
 from Agents.ReinforcementLearningAgent import ReinforcementLearningAgent
 
 # Parses command line arguments to get settings for program
 def parseCommandLineArguements():
     parser = ArgumentParser()
     parser.add_argument("-a", dest="agentName",
-                        help="Agent name to run experiments for - random, jugglingBot, ga, rl", metavar="Agent", required=True, choices=["random", "jugglingBot", "ga", "rl"])
+                        help="Agent name to run experiments for - random, ajugglingBot, djugglingBot, ga, rl", metavar="Agent", required=True, choices=["random", "ajugglingBot", "djugglingBot", "ga", "rl"])
     parser.add_argument("-n", dest="numberExperiments",
                         help="Number of experiments to run e.g 100 ", metavar="Num of Runs", default=10)
     parser.add_argument("-s", dest="isSilent", metavar="Is Silent", default=False,
@@ -26,8 +27,10 @@ def parseCommandLineArguements():
 def getAgentClass(name: str):
     if(name == "random"):
         return RandomAgent()
-    elif(name == "jugglingBot"):
-        return JugglingReactiveAgent()
+    elif(name == "ajugglingBot"):
+        return AggressiveJugglingReactiveAgent()
+    elif(name == "djugglingBot"):
+        return DefensiveJugglingReactiveAgent()
     elif(name == "rl"):
         return ReinforcementLearningAgent()
     else:

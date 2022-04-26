@@ -3,7 +3,7 @@ from Agents.Agent import Agent
 from Models.Actions import BoxingAction
 
 # principle for this approach is 
-class JugglingReactiveAgent(Agent):
+class AggressiveJugglingReactiveAgent(Agent):
     def __init__(self):
         super().__init__()
         self.lastAction: BoxingAction = BoxingAction.NOOP
@@ -56,7 +56,7 @@ class JugglingReactiveAgent(Agent):
             return BoxingAction.NOOP
         elif(self.lastAction == BoxingAction.FIRE_MOVE_DOWN):
             self.midCombo = False
-            return BoxingAction.NOOP
+            return BoxingAction.MOVE_RIGHT
         else:
             # Last was NOOP so now need to return either FIRE UP MOVE or FIRE DOWN MOVE depending on state of combo
             if(self.midCombo == True):
