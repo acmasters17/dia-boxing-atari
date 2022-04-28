@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from Agents.Agent import Agent
+from Agents.MoreSwayAggressiveJugglingReactiveAgent import MoreSwayAggressiveJugglingReactiveAgent
 from Agents.RandomAgent import RandomAgent
 from Agents.AggressiveJugglingReactiveAgent import AggressiveJugglingReactiveAgent
 from Agents.DefensiveJugglingReactiveAgent import DefensiveJugglingReactiveAgent
@@ -30,7 +31,7 @@ def getAgentClass(name: str):
     elif(name == "ajugglingBot"):
         return AggressiveJugglingReactiveAgent()
     elif(name == "djugglingBot"):
-        return DefensiveJugglingReactiveAgent()
+        return MoreSwayAggressiveJugglingReactiveAgent()
     elif(name == "rl"):
         return ReinforcementLearningAgent()
     else:
