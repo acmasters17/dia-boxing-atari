@@ -20,7 +20,7 @@ LOCAL_LOGS_DIR = './TrainingInfo/local_logs'
 TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
 TIMESTAMPS = 100000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
-callback = SaveOnBestTrainingRewardCallback(check_freq=1000,save_path=CHECKPOINT_DIR, algorithm_name="A2C_CnnPolicy")
+callback = SaveOnBestTrainingRewardCallback(check_freq=5000,save_path=CHECKPOINT_DIR, algorithm_name="A2C_CnnPolicy")
 env = make_atari_env('BoxingNoFrameskip-v4', n_envs=4, seed=0, monitor_dir=LOCAL_LOGS_DIR)
 # Frame-stacking with 4 frames
 env = VecFrameStack(env, n_stack=4)
