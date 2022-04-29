@@ -2,7 +2,6 @@ import random
 from gym import Env
 from Agents.Agent import Agent
 
-
 # Agent will load model that is input
 class ReinforcementLearningAgent(Agent):
     def __init__(self):
