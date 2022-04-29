@@ -7,8 +7,8 @@ from Utilities.modelSaver import SaveOnBestTrainingRewardCallback
 from stable_baselines3.common import results_plotter
 from stable_baselines3 import A2C, TD3
 from stable_baselines3.common.results_plotter import plot_results
-from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.noise import NormalActionNoise
+from stable_baselines3.common.env_util import make_atari_env
+from stable_baselines3.common.vec_env import VecFrameStack
 
 
 
@@ -20,20 +20,14 @@ LOCAL_LOGS_DIR = './TrainingInfo/local_logs'
 TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
 TIMESTAMPS = 100000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
-callback = SaveOnBestTrainingRewardCallback(check_freq=1000,save_path=CHECKPOINT_DIR, algorithm_name="TD3_MlpPolicy")
-env = gym.make('Boxing-v0')
-random.seed(0)
-env.seed(0)
-env = Monitor(env, LOCAL_LOGS_DIR)
-# Add some action noise for exploration
-n_actions = env.action_space.shape[-1]
-action_noise = NormalActionNoise(mean=np.zeros(n_actions), sigma=0.1 * np.ones(n_actions))
-# Because we use parameter noise, we should use a MlpPolicy with layer normalization
-model = TD3('MlpPolicy', env, action_noise=action_noise, verbose=0, tensorboard_log=TENSORBOARD_LOGS_DIR)
-# model = A2C("MlpPolicy", env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
+callback = SaveOnBestTrainingRewardCallback(check_freq=1000,save_path=CHECKPOINT_DIR, algorithm_name="A2C_CnnPolicy")
+env = make_atari_env('BoxingNoFrameskip-v4', n_envs=4, seed=0, monitor_dir=LOCAL_LOGS_DIR)
+# Frame-stacking with 4 frames
+env = VecFrameStack(env, n_stack=4)
+model = A2C('CnnPolicy', env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
 model.learn(total_timesteps=TIMESTAMPS, callback=callback)
 
-plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "TD3-MlpPolicy Boxing")
+plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "A2C_CnnPolicy Boxing")
 plt.show()
 exit(0)
 
