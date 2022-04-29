@@ -5,7 +5,9 @@ from Graphs.resultsPieChart import drawResultsPieChart
 from Graphs.rewardLineGraph import drawRewardLineGraph
 from Scoring.metricHandler import MetricHandler
 from Utilities.utilityFunctions import getAgentClass, getIsSilent, getNumberOfExperiments, getShouldDisplay, parseCommandLineArguements
+from stable_baselines3.common.env_util import make_atari_env
 import random
+from stable_baselines3.common.vec_env import VecFrameStack
 
 plt.style.use('seaborn-deep')
 
@@ -25,10 +27,15 @@ isSilent = getIsSilent(settings.isSilent)
 shouldDisplay = getShouldDisplay(settings.shouldDisplay)
 
 # Create the atari game environment and get a metrics Handler
-env = gym.make('Boxing-v0', render_mode="human") if shouldDisplay else gym.make('Boxing-v0')
-# Set the seed of the runs
-random.seed(0)
-env.seed(0)
+if(settings.agentName == "rl"):
+    # build different environment type for rl algorithms
+    env = make_atari_env('BoxingNoFrameskip-v4', seed=0, wrapper_kwargs=[render_mode: "human"])
+    env = VecFrameStack(env, n_stack=4)
+else:
+    env = gym.make('Boxing-v0', render_mode="human") if shouldDisplay else gym.make('Boxing-v0')
+    # Set the seed of the runs
+    random.seed(0)
+    env.seed(0)
 metricsHandler = MetricHandler()
 
 
@@ -49,6 +56,9 @@ for i in range(0, numExperiments):
 
     while runFinished == False:
         newobs, newreward, done, info = env.step(chosenAgent.getAction(env,observation,reward))
+        if settings.agentName == "rl" and shouldDisplay:
+            # render if needed for rl
+            env.render(mode="human")
 
         observation = newobs
         reward = newreward
