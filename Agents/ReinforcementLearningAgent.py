@@ -1,13 +1,13 @@
 import random
 from gym import Env
+from stable_baselines3 import A2C
 from Agents.Agent import Agent
 
-# Agent will load model that is input
+# Agent will load best model
 class ReinforcementLearningAgent(Agent):
     def __init__(self):
         super().__init__()
-        
-        # self.model = model
+        self.model = A2C.load("./TrainingInfo/models/A2C_MlpPolicy/model_at_50000")
 
     def getAction(self,env:Env,lastobservation,lastreward):
         action, _states = self.model.predict(lastobservation, deterministic=True)
