@@ -6,12 +6,12 @@ from stable_baselines3.common.callbacks import BaseCallback
 
 
 class SaveOnBestTrainingRewardCallback(BaseCallback):
-    def __init__(self, check_freq: int, save_path: str, verbose: int = 1):
+    def __init__(self, check_freq: int, save_path: str, algorithm_name: str, verbose: int = 1):
         super(SaveOnBestTrainingRewardCallback, self).__init__(verbose)
         self.check_freq = check_freq
         self.save_path = save_path
         self.log_dir = os.path.join(save_path, 'local_logs')
-        self.model_save_path = os.path.join(save_path, 'models')
+        self.model_save_path = os.path.join(save_path, 'models', algorithm_name)
         self.best_model_save_path = os.path.join(self.model_save_path, 'best_model')
         self.best_mean_reward = -np.inf
 

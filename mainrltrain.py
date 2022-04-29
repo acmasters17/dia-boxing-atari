@@ -18,7 +18,7 @@ LOCAL_LOGS_DIR = './TrainingInfo/local_logs'
 TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
 TIMESTAMPS = 100000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
-callback = SaveOnBestTrainingRewardCallback(check_freq=4000,save_path=CHECKPOINT_DIR)
+callback = SaveOnBestTrainingRewardCallback(check_freq=4000,save_path=CHECKPOINT_DIR, algorithm_name="A2C_MlpPolicy")
 # There already exists an environment generator
 # that will make and wrap atari environments correctly.
 # Here we are also multi-worker training (n_envs=4 => 4 environments)
