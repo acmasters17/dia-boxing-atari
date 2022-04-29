@@ -18,7 +18,7 @@ from stable_baselines3.common.vec_env import VecFrameStack
 CHECKPOINT_DIR = './TrainingInfo/'
 LOCAL_LOGS_DIR = './TrainingInfo/local_logs'
 TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
-TIMESTAMPS = 1000000
+TIMESTAMPS = 5000000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
 callback = SaveOnBestTrainingRewardCallback(check_freq=2500,save_path=CHECKPOINT_DIR, algorithm_name="A2C_CnnPolicy")
 env = make_atari_env('BoxingNoFrameskip-v4', n_envs=4, seed=0, monitor_dir=LOCAL_LOGS_DIR)
@@ -27,7 +27,7 @@ env = VecFrameStack(env, n_stack=4)
 model = A2C('CnnPolicy', env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
 model.learn(total_timesteps=TIMESTAMPS, callback=callback)
 
-plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "A2C_CnnPolicy Boxing")
+plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "A2C_CnnPolicy Boxing Over 5 million training cycles")
 plt.show()
 exit(0)
 
