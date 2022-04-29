@@ -29,7 +29,7 @@ shouldDisplay = getShouldDisplay(settings.shouldDisplay)
 # Create the atari game environment and get a metrics Handler
 if(settings.agentName == "rl"):
     # build different environment type for rl algorithms
-    env = make_atari_env('BoxingNoFrameskip-v4', seed=0, wrapper_kwargs=[render_mode: "human"])
+    env = make_atari_env('BoxingNoFrameskip-v4', seed=0)
     env = VecFrameStack(env, n_stack=4)
 else:
     env = gym.make('Boxing-v0', render_mode="human") if shouldDisplay else gym.make('Boxing-v0')
@@ -56,6 +56,7 @@ for i in range(0, numExperiments):
 
     while runFinished == False:
         newobs, newreward, done, info = env.step(chosenAgent.getAction(env,observation,reward))
+    
         if settings.agentName == "rl" and shouldDisplay:
             # render if needed for rl
             env.render(mode="human")
@@ -63,7 +64,7 @@ for i in range(0, numExperiments):
         observation = newobs
         reward = newreward
 
-        metricsHandler.updateScoresForCurrentExperiment(newreward)
+        metricsHandler.updateScoresForCurrentExperiment(newreward[0] if settings.agentName == "rl" else newreward)
 
         runFinished = done
 
