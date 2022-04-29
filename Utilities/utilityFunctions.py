@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-
 from Agents.Agent import Agent
 from Agents.MoreSwayAggressiveJugglingReactiveAgent import MoreSwayAggressiveJugglingReactiveAgent
 from Agents.RandomAgent import RandomAgent
 from Agents.AggressiveJugglingReactiveAgent import AggressiveJugglingReactiveAgent
 from Agents.DefensiveJugglingReactiveAgent import DefensiveJugglingReactiveAgent
 from Agents.ReinforcementLearningAgent import ReinforcementLearningAgent
+from Agents.Test import TestAgent
+from Models.Actions import BoxingAction
 
 # Parses command line arguments to get settings for program
 def parseCommandLineArguements():
@@ -31,7 +32,7 @@ def getAgentClass(name: str):
     elif(name == "ajugglingBot"):
         return AggressiveJugglingReactiveAgent()
     elif(name == "djugglingBot"):
-        return MoreSwayAggressiveJugglingReactiveAgent()
+        return TestAgent()
     elif(name == "rl"):
         return ReinforcementLearningAgent()
     else:
