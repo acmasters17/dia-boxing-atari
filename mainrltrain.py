@@ -21,9 +21,9 @@ TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
 TIMESTAMPS = 5000000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
 callback = SaveOnBestTrainingRewardCallback(check_freq=2500,save_path=CHECKPOINT_DIR, algorithm_name="DQN_CnnPolicy")
-env = make_atari_env('BoxingNoFrameskip-v4', n_envs=4, seed=0, monitor_dir=LOCAL_LOGS_DIR)
+env = make_atari_env('BoxingNoFrameskip-v4', n_envs=2, seed=0, monitor_dir=LOCAL_LOGS_DIR)
 # Frame-stacking with 4 frames
-env = VecFrameStack(env, n_stack=4)
+env = VecFrameStack(env, n_stack=2)
 model = DQN('CnnPolicy', env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
 model.learn(total_timesteps=TIMESTAMPS, callback=callback)
 
