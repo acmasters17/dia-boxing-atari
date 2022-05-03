@@ -7,7 +7,7 @@ from Agents.Agent import Agent
 class ReinforcementLearningAgent(Agent):
     def __init__(self):
         super().__init__()
-        self.model = A2C.load("./TrainingInfo/models/A2C_CnnPolicy/model_at_5000000")
+        self.model = A2C.load("./TrainingInfo/models/PPO_CnnPolicy/model_at_100000")
     def getAction(self,env:Env,lastobservation,lastreward):
         action, _states = self.model.predict(lastobservation, deterministic=True)
         return action

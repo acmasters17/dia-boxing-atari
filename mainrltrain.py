@@ -18,9 +18,9 @@ from stable_baselines3.common.vec_env import VecFrameStack
 CHECKPOINT_DIR = './TrainingInfo/'
 LOCAL_LOGS_DIR = './TrainingInfo/local_logs'
 TENSORBOARD_LOGS_DIR = './TrainingInfo/tensorboard_logs/'
-TIMESTAMPS = 100000
+TIMESTAMPS = 1000000
 os.makedirs(LOCAL_LOGS_DIR, exist_ok=True)
-callback = SaveOnBestTrainingRewardCallback(check_freq=25000,save_path=CHECKPOINT_DIR, algorithm_name="PPO_CnnPolicy")
+callback = SaveOnBestTrainingRewardCallback(check_freq=2500,save_path=CHECKPOINT_DIR, algorithm_name="PPO_CnnPolicy")
 env = make_atari_env('BoxingNoFrameskip-v4', n_envs=4, seed=0, monitor_dir=LOCAL_LOGS_DIR)
 env = VecFrameStack(env,n_stack=4)
 model = PPO('CnnPolicy', env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
