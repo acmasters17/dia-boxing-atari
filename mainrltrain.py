@@ -26,7 +26,7 @@ env = VecFrameStack(env,n_stack=4)
 model = PPO('CnnPolicy', env, verbose=1, tensorboard_log=TENSORBOARD_LOGS_DIR)
 model.learn(total_timesteps=TIMESTAMPS, callback=callback)
 
-plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "PPO_CnnPolicy Boxing Over 5 million training cycles")
+plot_results([LOCAL_LOGS_DIR], TIMESTAMPS, results_plotter.X_TIMESTEPS, "PPO_CnnPolicy Boxing Over 1 million training cycles")
 plt.show()
 exit(0)
 
