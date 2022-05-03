@@ -2,7 +2,6 @@ from gym import Env
 from Agents.Agent import Agent
 from Models.Actions import BoxingAction
 
-# principle for this approach is 
 class MoreSwayAggressiveJugglingReactiveAgent(Agent):
     def __init__(self):
         super().__init__()

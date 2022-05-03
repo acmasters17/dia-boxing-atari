@@ -2,7 +2,6 @@ from gym import Env
 from Agents.Agent import Agent
 from Models.Actions import BoxingAction
 
-# principle for this approach is 
 class DefensiveJugglingReactiveAgent(Agent):
     def __init__(self):
         super().__init__()
@@ -29,10 +28,6 @@ class DefensiveJugglingReactiveAgent(Agent):
         self.lastAction = newAction
         return newAction.value
 
-            
-            
-
-        
 
     # Moves Down Right / slowly into the middle while firing
     # alternates with NOOP so that fist retracts
@@ -56,6 +51,7 @@ class DefensiveJugglingReactiveAgent(Agent):
             return BoxingAction.NOOP
         elif(self.lastAction == BoxingAction.FIRE_MOVE_DOWN):
             self.midCombo = False
+            # Backs up after combo
             return BoxingAction.MOVE_LEFT
         else:
             # Last was NOOP so now need to return either FIRE UP MOVE or FIRE DOWN MOVE depending on state of combo

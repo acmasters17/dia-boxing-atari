@@ -23,11 +23,13 @@ numExperiments = getNumberOfExperiments(settings.numberExperiments)
 # Get if program should be silent or not
 isSilent = getIsSilent(settings.isSilent)
 
-# Get if proram should render or not
+# Get if program should render or not
 shouldDisplay = getShouldDisplay(settings.shouldDisplay)
 
+shouldCreateRLEnv = True if settings.agentName == "rlA2C" or settings.agentName == "rlPPO" else False
+
 # Create the atari game environment and get a metrics Handler
-if(settings.agentName == "rl"):
+if(shouldCreateRLEnv):
     # build different environment type for rl algorithms
     env = make_atari_env('BoxingNoFrameskip-v4', seed=0)
     env = VecFrameStack(env, n_stack=4)
@@ -57,14 +59,14 @@ for i in range(0, numExperiments):
     while runFinished == False:
         newobs, newreward, done, info = env.step(chosenAgent.getAction(env,observation,reward))
     
-        if settings.agentName == "rl" and shouldDisplay:
+        if shouldCreateRLEnv and shouldDisplay:
             # render if needed for rl
             env.render(mode="human")
 
         observation = newobs
         reward = newreward
-
-        metricsHandler.updateScoresForCurrentExperiment(newreward[0] if settings.agentName == "rl" else newreward)
+        
+        metricsHandler.updateScoresForCurrentExperiment(newreward[0] if shouldCreateRLEnv else newreward)
 
         runFinished = done
 
