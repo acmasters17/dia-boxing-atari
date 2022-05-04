@@ -54,7 +54,7 @@ class MetricHandler:
         return sum(numSeconds) / len(numSeconds)
 
     def getAverageWinRate(self):
-        winRatio = (self.getNumberOfKOWins() + self.getNumberOfWins() / len(self.experimentsMetricsList))
+        winRatio = ((self.getNumberOfKOWins() + self.getNumberOfWins()) / len(self.experimentsMetricsList))
         return winRatio * 100
 
     def getNumberOfKOWins(self):
