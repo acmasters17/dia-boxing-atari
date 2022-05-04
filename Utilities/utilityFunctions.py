@@ -11,7 +11,7 @@ from Agents.ReinforcementLearningAgent import ReinforcementLearningAgent
 def parseCommandLineArguements():
     parser = ArgumentParser()
     parser.add_argument("-a", dest="agentName",
-                        help="Agent name to run experiments for - random, ajugglingBot, djugglingBot, rlA2C, rlPPO", metavar="Agent", required=True, choices=["random", "ajugglingBot", "djugglingBot", "rlA2C", "rlPPO"])
+                        help="Agent name to run experiments for - random, sajugglingBot, ajugglingBot, djugglingBot, rlA2C, rlPPO", metavar="Agent", required=True, choices=["random", "sajugglingBot", "ajugglingBot", "djugglingBot", "rlA2C", "rlPPO"])
     parser.add_argument("-n", dest="numberExperiments",
                         help="Number of experiments to run e.g 100 ", metavar="Num of Runs", default=10)
     parser.add_argument("-s", dest="isSilent", metavar="Is Silent", default=False,
@@ -28,6 +28,8 @@ def parseCommandLineArguements():
 def getAgentClass(name: str):
     if(name == "random"):
         return RandomAgent()
+    elif(name == "sajugglingBot"):
+        return MoreSwayAggressiveJugglingReactiveAgent()
     elif(name == "ajugglingBot"):
         return AggressiveJugglingReactiveAgent()
     elif(name == "djugglingBot"):
