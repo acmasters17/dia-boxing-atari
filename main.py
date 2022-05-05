@@ -1,6 +1,7 @@
 import gym
 from matplotlib import pyplot as plt
 from Graphs.playerVsEnemyScoreLineGraph import drawPlayerVsEnemyScoreLineGraph
+from Graphs.resultsBarChart import drawResultsBarChart
 from Graphs.resultsPieChart import drawResultsPieChart
 from Graphs.rewardLineGraph import drawRewardLineGraph
 from Scoring.metricHandler import MetricHandler
@@ -108,11 +109,13 @@ print("\n")
 experiments = metricsHandler.getAllExperiments()
 
 # Draw a graph of Results
-drawResultsPieChart(metricsHandler)
+drawResultsPieChart(metricsHandler=metricsHandler)
 # Draw a line graph of scores
 drawPlayerVsEnemyScoreLineGraph(playerscores=[ e.getAgentScore() for e in experiments], enemyscores=[ e.getEnemyScore() for e in experiments])
 # Draw a graph of rewards
 drawRewardLineGraph(rewards=[ e.getReward() for e in experiments])
+# Draw a bar Chart
+drawResultsBarChart(metricsHandler=metricsHandler)
 
 
 
