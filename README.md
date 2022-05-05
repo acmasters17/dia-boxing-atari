@@ -52,6 +52,16 @@ For example, to run 1000 experiments of the random agent with no rendering, one 
 
 `python3 main.py -a "random" -n 1000`
 
+Currently in terms of agent options, the following agents are available:
+
+| Agent Name | Value |
+| ---        | ---   |
+| Random     | random|
+| ARRA       | ARRA  |
+| SARRA      | SARRA |
+| A2C        | rlA2C |
+| PPO        | rlPPO |
+
 ## Training Program
 
 The training program can be found in `mainrltrain.py` and can be used to train various reinforcement learning models and save them. Note, this is less flushed out as the main program for now due to time constraints of training models.
