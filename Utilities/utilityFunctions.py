@@ -11,13 +11,13 @@ from Agents.ReinforcementLearningAgent import ReinforcementLearningAgent
 def parseCommandLineArguements():
     parser = ArgumentParser()
     parser.add_argument("-a", dest="agentName",
-                        help="Agent name to run experiments for - random, sajugglingBot, ajugglingBot, djugglingBot, rlA2C, rlPPO", metavar="Agent", required=True, choices=["random", "sajugglingBot", "ajugglingBot", "djugglingBot", "rlA2C", "rlPPO"])
+                        help="Agent name to run experiments for - random, ARRA, SARRA, rlA2C, rlPPO", metavar="Agent", required=True, choices=["random", "ARRA", "SARRA", "rlA2C", "rlPPO"])
     parser.add_argument("-n", dest="numberExperiments",
                         help="Number of experiments to run e.g 100 ", metavar="Num of Runs", default=10)
     parser.add_argument("-s", dest="isSilent", metavar="Is Silent", default=False,
-                        help="don't print experiment status messages to stdout")
+                        help="Don't print experiment status messages to stdout")
     parser.add_argument("-d", dest="shouldDisplay", metavar="Display Screen", default=False,
-                        help="render what is happening in the game, note this displays a fast version for RL algorithms")
+                        help="Render what is happening in the game, note this displays a fast version for RL algorithms")
 
     args = parser.parse_args()
 
@@ -28,12 +28,10 @@ def parseCommandLineArguements():
 def getAgentClass(name: str):
     if(name == "random"):
         return RandomAgent()
-    elif(name == "sajugglingBot"):
+    elif(name == "SARRA"):
         return MoreSwayAggressiveJugglingReactiveAgent()
-    elif(name == "ajugglingBot"):
+    elif(name == "ARRA"):
         return AggressiveJugglingReactiveAgent()
-    elif(name == "djugglingBot"):
-        return DefensiveJugglingReactiveAgent()
     elif(name == "rlA2C"):
         return ReinforcementLearningAgent(model=A2C.load("./TrainingInfo/models/A2C_CnnPolicy/best_model"))
     elif(name == "rlPPO"):

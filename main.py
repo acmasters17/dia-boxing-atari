@@ -87,7 +87,7 @@ for i in range(0, numExperiments):
 
 # Log out results of all experiments 
 print("*************************\n")
-print("RESULTS")
+print("RESULTS for " + settings.agentName)
 print("-------------------------")
 print("Number of KO Wins: ", metricsHandler.getNumberOfKOWins())
 print("Number of Wins: ", metricsHandler.getNumberOfWins())
