@@ -18,7 +18,7 @@ Additionally the following packages need to be installed by `pip install` or ano
 | tensorboard | 2.8.0 |
 | stable-baselines3 | 1.5.0 |
 
-This should be all packages but some dependancies may have been missed or updated so please install these via `pip install` or contact me if you are having more trouble.
+This should be all packages but some dependancies may have been missed or updated so please install these via `pip install` or contact me if you are having more trouble at psyam22@nottingham.ac.uk.
 
 ## Model Choice
 
