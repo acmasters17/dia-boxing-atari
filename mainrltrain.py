@@ -1,11 +1,8 @@
 import os
-import random
-import gym
 from matplotlib import pyplot as plt
-import numpy as np
 from Utilities.modelSaver import SaveOnBestTrainingRewardCallback
 from stable_baselines3.common import results_plotter
-from stable_baselines3 import A2C, DQN, PPO, TD3
+from stable_baselines3 import A2C, DQN, PPO
 from stable_baselines3.common.results_plotter import plot_results
 from stable_baselines3.common.env_util import make_atari_env
 from stable_baselines3.common.vec_env import VecFrameStack

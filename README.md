@@ -71,3 +71,5 @@ To train a model simply run:
 `python3 mainrltrain.py`
 
 In order to configure what model is trained currently the only way to do this is to manually modify the `mainrltrain.py` file with the new model and values you wish to run it with.
+
+To view the logs from the training, they are sent to the `./TrainingInfo/tensorboard_logs` directory and can be seen easily if using visual studio code via running command shift p and then run `Python: Launch Tensorboard` and click use current directory and it should find all logs been run.
